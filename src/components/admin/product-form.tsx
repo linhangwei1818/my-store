@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -96,37 +96,42 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
     setForm({ ...form, name, slug });
   };
 
-  const handleImageUpload = async () => {
-    if (imageFiles.length === 0) return;
-
-    setUploading(true);
-    const urls: string[] = [...imageUrls];
-
-    for (const file of imageFiles) {
-      const formData = new FormData();
-      formData.append("file", file);
-
-      try {
-        const res = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-        const data = await res.json();
-        if (data.url) urls.push(data.url);
-      } catch {
-        toast.error("Failed to upload image");
-      }
-    }
-
-    setImageUrls(urls);
-    setImageFiles([]);
-    setUploading(false);
-  };
+  const imageUrlsRef = useRef(imageUrls);
+  useEffect(() => { imageUrlsRef.current = imageUrls }, [imageUrls]);
 
   useEffect(() => {
-    if (imageFiles.length > 0) {
-      handleImageUpload();
-    }
+    if (imageFiles.length === 0) return;
+
+    let cancelled = false;
+    const upload = async () => {
+      setUploading(true);
+      const urls: string[] = [...imageUrlsRef.current];
+
+      for (const file of imageFiles) {
+        const formData = new FormData();
+        formData.append("file", file);
+
+        try {
+          const res = await fetch("/api/upload", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await res.json();
+          if (data.url) urls.push(data.url);
+        } catch {
+          toast.error("Failed to upload image");
+        }
+      }
+
+      if (!cancelled) {
+        setImageUrls(urls);
+        setImageFiles([]);
+        setUploading(false);
+      }
+    };
+    upload();
+    return () => { cancelled = true };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageFiles]);
 
   const handleSubmit = async (e: React.FormEvent) => {

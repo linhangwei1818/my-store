@@ -1,9 +1,9 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Pencil, Trash2, Plus } from "lucide-react";
+import { Pencil, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
 interface Category {
@@ -26,16 +26,19 @@ export default function AdminCategoriesPage() {
     sortOrder: "0",
   });
 
-  const fetchCategories = async () => {
-    const res = await fetch("/api/categories");
-    const data = await res.json();
-    setCategories(data.categories);
-    setLoading(false);
-  };
+  const fetchCategories = useCallback(async () => {
+    try {
+      const res = await fetch("/api/categories")
+      const data = await res.json()
+      setCategories(data.categories)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
 
   useEffect(() => {
-    fetchCategories();
-  }, []);
+    fetchCategories()
+  }, [fetchCategories]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
