@@ -24,7 +24,7 @@ export default function AdminLoginPage() {
     })
 
     if (result?.error) {
-      setError("Invalid email or password")
+      setError("邮箱或密码错误")
       setLoading(false)
     } else {
       router.push("/admin")
@@ -36,7 +36,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-(--muted) p-4">
       <div className="w-full max-w-sm">
         <div className="bg-white rounded-xl border border-(--border) p-8 shadow-sm">
-          <h1 className="text-xl font-bold text-center mb-6">Admin Login</h1>
+          <h1 className="text-xl font-bold text-center mb-6">后台登录</h1>
 
           {error && (
             <div className="bg-red-50 text-red-600 text-sm rounded-lg p-3 mb-4">
@@ -46,21 +46,21 @@ export default function AdminLoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1.5">Email</label>
+              <label className="block text-sm font-medium mb-1.5">邮箱</label>
               <Input
                 name="email"
                 type="email"
                 required
-                placeholder="admin@example.com"
+                placeholder="请输入邮箱"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1.5">Password</label>
+              <label className="block text-sm font-medium mb-1.5">密码</label>
               <Input
                 name="password"
                 type="password"
                 required
-                placeholder="Enter password"
+                placeholder="请输入密码"
               />
             </div>
             <Button
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
               type="submit"
               disabled={loading}
             >
-              {loading ? "Signing in..." : "Sign In"}
+              {loading ? "登录中..." : "登录"}
             </Button>
           </form>
         </div>

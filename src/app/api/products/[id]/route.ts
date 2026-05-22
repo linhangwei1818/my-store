@@ -57,7 +57,9 @@ export async function PUT(
 
     return NextResponse.json({ product });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to update product" }, { status: 500 });
+    console.error("Update product error:", error);
+    const message = error instanceof Error ? error.message : "Failed to update product";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 

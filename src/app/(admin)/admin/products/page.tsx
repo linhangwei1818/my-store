@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { formatPrice } from "@/lib/utils";
 import { Plus, Pencil } from "lucide-react";
+import { DeleteProductButton } from "@/components/admin/delete-product-button";
 
 export const dynamic = "force-dynamic";
 
@@ -86,11 +87,14 @@ export default async function AdminProductsPage() {
                     </Badge>
                   </td>
                   <td className="p-3 text-right">
-                    <Link href={`/admin/products/${product.id}/edit`}>
-                      <Button variant="ghost" size="sm">
-                        <Pencil className="size-3.5" />
-                      </Button>
-                    </Link>
+                    <div className="flex items-center justify-end gap-1">
+                      <Link href={`/admin/products/${product.id}/edit`}>
+                        <Button variant="ghost" size="sm">
+                          <Pencil className="size-3.5" />
+                        </Button>
+                      </Link>
+                      <DeleteProductButton productId={product.id} productName={product.name} />
+                    </div>
                   </td>
                 </tr>
               ))}
