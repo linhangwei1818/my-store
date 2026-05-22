@@ -1,3 +1,14 @@
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+function createStripe(): Stripe {
+  return new Stripe(process.env.STRIPE_SECRET_KEY || "");
+}
+
+let _stripe: Stripe | undefined;
+
+export function getStripe(): Stripe {
+  if (!_stripe) {
+    _stripe = createStripe();
+  }
+  return _stripe;
+}

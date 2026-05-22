@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { Button } from "@/components/ui/button";
 import { CheckCircle } from "lucide-react";
 
@@ -17,7 +17,7 @@ export default async function CheckoutSuccessPage({
 
   let customerEmail = "";
   try {
-    const session = await stripe.checkout.sessions.retrieve(session_id);
+    const session = await getStripe().checkout.sessions.retrieve(session_id);
     customerEmail = session.customer_details?.email || "";
   } catch {
     // Session might not be available yet (webhook delayed)

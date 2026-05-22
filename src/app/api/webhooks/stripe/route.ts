@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { stripe } from "@/lib/stripe"
+import { getStripe } from "@/lib/stripe"
 import { prisma } from "@/lib/prisma"
 import { generateOrderNumber } from "@/lib/utils"
 import Stripe from "stripe"
@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event
 
   try {
-    event = stripe.webhooks.constructEvent(
+    event = getStripe().webhooks.constructEvent(
       body,
       sig,
       process.env.STRIPE_WEBHOOK_SECRET!
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
     const session = event.data.object as Stripe.Checkout.Session
 
     try {
-      const fullSession: AnySession = await stripe.checkout.sessions.retrieve(
+      const fullSession: AnySession = await getStripe().checkout.sessions.retrieve(
         session.id,
         { expand: ["line_items"] }
       )

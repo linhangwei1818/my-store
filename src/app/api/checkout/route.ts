@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import { getStripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
 import { SITE_URL, FREE_SHIPPING_THRESHOLD, SHIPPING_FLAT_RATE } from "@/lib/constants";
 import { checkoutSchema } from "@/lib/validations";
@@ -88,7 +88,7 @@ export async function POST(req: NextRequest) {
       productMap[String(index)] = item.productId;
     });
 
-    const session = await stripe.checkout.sessions.create({
+    const session = await getStripe().checkout.sessions.create({
       customer_email: customer.email,
       shipping_address_collection: {
         allowed_countries: ["US", "CA", "GB", "AU", "DE", "FR"],
