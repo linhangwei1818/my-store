@@ -20,11 +20,11 @@ export default async function AdminProductsPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold">Products</h1>
+        <h1 className="text-2xl font-bold">商品管理</h1>
         <Link href="/admin/products/new">
           <Button variant="primary">
             <Plus className="size-4 mr-1" />
-            Add Product
+            添加商品
           </Button>
         </Link>
       </div>
@@ -32,22 +32,21 @@ export default async function AdminProductsPage() {
       <div className="bg-white rounded-xl border border-(--border) overflow-hidden">
         {products.length === 0 ? (
           <p className="p-6 text-sm text-(--muted-foreground)">
-            No products yet.{" "}
+            暂无商品。{" "}
             <Link href="/admin/products/new" className="text-(--primary) hover:underline">
-              Create your first product
+              创建第一个商品
             </Link>
-            .
           </p>
         ) : (
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-(--border) text-left text-(--muted-foreground)">
-                <th className="p-3 font-medium">Product</th>
+                <th className="p-3 font-medium">商品</th>
                 <th className="p-3 font-medium">SKU</th>
-                <th className="p-3 font-medium">Category</th>
-                <th className="p-3 font-medium text-right">Price</th>
-                <th className="p-3 font-medium">Status</th>
-                <th className="p-3 font-medium text-right">Actions</th>
+                <th className="p-3 font-medium">分类</th>
+                <th className="p-3 font-medium text-right">价格</th>
+                <th className="p-3 font-medium">状态</th>
+                <th className="p-3 font-medium text-right">操作</th>
               </tr>
             </thead>
             <tbody>
@@ -83,7 +82,7 @@ export default async function AdminProductsPage() {
                     <Badge
                       variant={product.isActive ? "success" : "destructive"}
                     >
-                      {product.isActive ? "Active" : "Inactive"}
+                      {product.isActive ? "上架" : "下架"}
                     </Badge>
                   </td>
                   <td className="p-3 text-right">

@@ -6,10 +6,10 @@ import { LayoutDashboard, Package, ShoppingBag, Tags, LogOut } from "lucide-reac
 import { signOut } from "next-auth/react"
 
 const navItems = [
-  { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/admin/products", label: "Products", icon: Package },
-  { href: "/admin/orders", label: "Orders", icon: ShoppingBag },
-  { href: "/admin/categories", label: "Categories", icon: Tags },
+  { href: "/admin", label: "仪表盘", icon: LayoutDashboard },
+  { href: "/admin/products", label: "商品管理", icon: Package },
+  { href: "/admin/orders", label: "订单管理", icon: ShoppingBag },
+  { href: "/admin/categories", label: "分类管理", icon: Tags },
 ]
 
 export function AdminSidebar() {
@@ -19,7 +19,7 @@ export function AdminSidebar() {
     <aside className="w-60 bg-white border-r border-(--border) flex flex-col flex-shrink-0">
       <div className="p-4 border-b border-(--border)">
         <Link href="/admin" className="text-lg font-bold">
-          MyStore Admin
+          MyStore 后台
         </Link>
       </div>
       <nav className="flex-1 p-3 space-y-1">
@@ -49,7 +49,7 @@ export function AdminSidebar() {
           className="flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-(--muted-foreground) hover:bg-red-50 hover:text-red-600 w-full transition-colors"
         >
           <LogOut className="size-4" />
-          Sign Out
+          退出登录
         </button>
       </div>
     </aside>

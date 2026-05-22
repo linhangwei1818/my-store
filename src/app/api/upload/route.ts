@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
-import fs from "fs";
 
 const UPLOAD_DIR =
   process.env.NODE_ENV === "production"
@@ -34,7 +33,7 @@ export async function POST(req: NextRequest) {
     const filepath = path.join(UPLOAD_DIR, filename);
     await writeFile(filepath, buffer);
 
-    const url = `/uploads/${filename}`;
+    const url = `/api/uploads/${filename}`;
 
     return NextResponse.json({ url });
   } catch (error) {
@@ -44,35 +43,4 @@ export async function POST(req: NextRequest) {
       { status: 500 }
     );
   }
-}
-
-// Serve uploaded files in production from /tmp
-export async function GET(req: NextRequest) {
-  const url = new URL(req.url);
-  const filePath = url.searchParams.get("path");
-  if (!filePath) {
-    return NextResponse.json({ error: "No path" }, { status: 400 });
-  }
-
-  const fullPath = path.join(UPLOAD_DIR, path.basename(filePath));
-  if (!fs.existsSync(fullPath)) {
-    return NextResponse.json({ error: "Not found" }, { status: 404 });
-  }
-
-  const buffer = fs.readFileSync(fullPath);
-  const ext = path.extname(fullPath).toLowerCase();
-  const mimeTypes: Record<string, string> = {
-    ".jpg": "image/jpeg",
-    ".jpeg": "image/jpeg",
-    ".png": "image/png",
-    ".gif": "image/gif",
-    ".webp": "image/webp",
-  };
-
-  return new NextResponse(buffer, {
-    headers: {
-      "Content-Type": mimeTypes[ext] || "application/octet-stream",
-      "Cache-Control": "public, max-age=31536000",
-    },
-  });
 }

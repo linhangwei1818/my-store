@@ -7,6 +7,15 @@ import { Select } from "@/components/ui/select";
 import { ORDER_STATUSES } from "@/lib/constants";
 import toast from "react-hot-toast";
 
+const statusLabels: Record<string, string> = {
+  PENDING: "待处理",
+  CONFIRMED: "已确认",
+  PROCESSING: "处理中",
+  SHIPPED: "已发货",
+  DELIVERED: "已送达",
+  CANCELLED: "已取消",
+};
+
 export function OrderActions({
   orderId,
   currentStatus,
@@ -32,13 +41,13 @@ export function OrderActions({
       });
 
       if (res.ok) {
-        toast.success("Order updated");
+        toast.success("订单已更新");
         router.refresh();
       } else {
-        toast.error("Failed to update order");
+        toast.error("更新失败");
       }
     } catch {
-      toast.error("Failed to update order");
+      toast.error("更新失败");
     } finally {
       setLoading(false);
     }
@@ -46,27 +55,27 @@ export function OrderActions({
 
   return (
     <div className="space-y-3">
-      <h3 className="font-semibold text-sm">Update Order</h3>
+      <h3 className="font-semibold text-sm">更新订单</h3>
       <div>
         <label className="block text-xs text-(--muted-foreground) mb-1">
-          Status
+          状态
         </label>
         <Select value={status} onChange={(e) => setStatus(e.target.value)}>
           {ORDER_STATUSES.map((s) => (
             <option key={s} value={s}>
-              {s}
+              {statusLabels[s] || s}
             </option>
           ))}
         </Select>
       </div>
       <div>
         <label className="block text-xs text-(--muted-foreground) mb-1">
-          Tracking Number
+          物流单号
         </label>
         <Input
           value={trackingNumber}
           onChange={(e) => setTrackingNumber(e.target.value)}
-          placeholder="Enter tracking number"
+          placeholder="输入物流单号"
         />
       </div>
       <Button
@@ -75,7 +84,7 @@ export function OrderActions({
         onClick={handleUpdate}
         disabled={loading}
       >
-        {loading ? "Updating..." : "Update Order"}
+        {loading ? "更新中..." : "更新订单"}
       </Button>
     </div>
   );

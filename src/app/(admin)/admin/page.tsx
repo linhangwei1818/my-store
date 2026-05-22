@@ -37,15 +37,15 @@ export default async function AdminDashboardPage() {
   const revenue = revenueResult._sum.totalAmount || 0;
 
   const stats = [
-    { label: "Active Products", value: totalProducts, icon: Package },
-    { label: "Total Orders", value: totalOrders, icon: ShoppingBag },
-    { label: "Revenue (30d)", value: formatPrice(revenue), icon: DollarSign },
-    { label: "Pending Orders", value: pendingOrders, icon: Clock },
+    { label: "在售商品", value: totalProducts, icon: Package },
+    { label: "总订单", value: totalOrders, icon: ShoppingBag },
+    { label: "近30天营收", value: formatPrice(revenue), icon: DollarSign },
+    { label: "待处理", value: pendingOrders, icon: Clock },
   ];
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
+      <h1 className="text-2xl font-bold mb-6">仪表盘</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         {stats.map((stat) => (
@@ -69,22 +69,22 @@ export default async function AdminDashboardPage() {
 
       <Card>
         <CardHeader>
-          <h2 className="font-semibold">Recent Orders</h2>
+          <h2 className="font-semibold">近期订单</h2>
         </CardHeader>
         <CardContent className="p-0">
           {recentOrders.length === 0 ? (
             <p className="p-6 text-sm text-(--muted-foreground)">
-              No orders yet.
+              暂无订单
             </p>
           ) : (
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-(--border) text-left text-(--muted-foreground)">
-                  <th className="p-3 font-medium">Order</th>
-                  <th className="p-3 font-medium">Customer</th>
-                  <th className="p-3 font-medium">Status</th>
-                  <th className="p-3 font-medium text-right">Total</th>
-                  <th className="p-3 font-medium">Date</th>
+                  <th className="p-3 font-medium">订单号</th>
+                  <th className="p-3 font-medium">客户</th>
+                  <th className="p-3 font-medium">状态</th>
+                  <th className="p-3 font-medium text-right">金额</th>
+                  <th className="p-3 font-medium">日期</th>
                 </tr>
               </thead>
               <tbody>
@@ -112,7 +112,7 @@ export default async function AdminDashboardPage() {
                             : "warning"
                         }
                       >
-                        {order.status}
+                        {order.status === "DELIVERED" ? "已发货" : order.status === "CANCELLED" ? "已取消" : order.status === "CONFIRMED" ? "已确认" : "待处理"}
                       </Badge>
                     </td>
                     <td className="p-3 text-right font-medium">

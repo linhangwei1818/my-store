@@ -15,18 +15,18 @@ export function DeleteProductButton({ productId, productName }: Props) {
   const [deleting, setDeleting] = useState(false)
 
   const handleDelete = async () => {
-    if (!confirm(`Delete "${productName}"? This will deactivate the product.`)) return
+    if (!confirm(`确定要删除「${productName}」吗？此操作不可撤销。`)) return
     setDeleting(true)
     try {
       const res = await fetch(`/api/products/${productId}`, { method: "DELETE" })
       if (res.ok) {
-        toast.success("Product deleted")
+        toast.success("商品已删除")
         router.refresh()
       } else {
-        toast.error("Failed to delete product")
+        toast.error("删除失败")
       }
     } catch {
-      toast.error("Failed to delete product")
+      toast.error("删除失败")
     } finally {
       setDeleting(false)
     }

@@ -74,11 +74,9 @@ export async function DELETE(
 
   const { id } = await params;
 
-  // Soft delete
-  await prisma.product.update({
-    where: { id },
-    data: { isActive: false },
-  });
+  // Hard delete — remove images first, then product
+  await prisma.productImage.deleteMany({ where: { productId: id } });
+  await prisma.product.delete({ where: { id } });
 
   return NextResponse.json({ success: true });
 }

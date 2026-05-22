@@ -119,7 +119,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
           const data = await res.json();
           if (data.url) urls.push(data.url);
         } catch {
-          toast.error("Failed to upload image");
+          toast.error("图片上传失败");
         }
       }
 
@@ -164,7 +164,6 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
       const data = await res.json();
 
       if (res.ok) {
-        // Save images
         if (imageUrls.length > 0 && data.product?.id) {
           for (let i = 0; i < imageUrls.length; i++) {
             await fetch(`/api/products/${data.product.id}/images`, {
@@ -180,15 +179,15 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
         }
 
         toast.success(
-          initialData?.id ? "Product updated" : "Product created"
+          initialData?.id ? "商品已更新" : "商品已创建"
         );
         router.push("/admin/products");
         router.refresh();
       } else {
-        toast.error(data.error || "Failed to save product");
+        toast.error(data.error || "保存失败");
       }
     } catch {
-      toast.error("Failed to save product");
+      toast.error("保存失败");
     } finally {
       setLoading(false);
     }
@@ -197,10 +196,10 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-8 max-w-2xl">
       <div className="bg-white rounded-xl border border-(--border) p-6 space-y-4">
-        <h2 className="font-semibold">Basic Information</h2>
+        <h2 className="font-semibold">基本信息</h2>
 
         <div>
-          <label className="block text-sm font-medium mb-1.5">Name *</label>
+          <label className="block text-sm font-medium mb-1.5">名称 *</label>
           <Input name="name" value={form.name} onChange={handleNameChange} required />
         </div>
 
@@ -208,13 +207,13 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
           <label className="block text-sm font-medium mb-1.5">Slug *</label>
           <Input name="slug" value={form.slug} onChange={handleChange} required />
           <p className="text-xs text-(--muted-foreground) mt-1">
-            URL-friendly identifier: {form.slug || "product-name"}
+            URL标识符: {form.slug || "product-name"}
           </p>
         </div>
 
         <div>
           <label className="block text-sm font-medium mb-1.5">
-            Short Description
+            简短描述
           </label>
           <Input
             name="shortDescription"
@@ -225,7 +224,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
 
         <div>
           <label className="block text-sm font-medium mb-1.5">
-            Description *
+            详细描述 *
           </label>
           <Textarea
             name="description"
@@ -239,7 +238,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium mb-1.5">
-              Price (cents) *
+              价格 (美分) *
             </label>
             <Input
               name="price"
@@ -251,7 +250,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
           </div>
           <div>
             <label className="block text-sm font-medium mb-1.5">
-              Compare-at Price (cents)
+              原价 (美分)
             </label>
             <Input
               name="compareAtPrice"
@@ -269,7 +268,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
           </div>
           <div>
             <label className="block text-sm font-medium mb-1.5">
-              Inventory
+              库存
             </label>
             <Input
               name="inventory"
@@ -278,14 +277,14 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
               onChange={handleChange}
             />
             <p className="text-xs text-(--muted-foreground) mt-1">
-              -1 = unlimited
+              -1 = 无限库存
             </p>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium mb-1.5">Weight (g)</label>
+            <label className="block text-sm font-medium mb-1.5">重量 (克)</label>
             <Input
               name="weight"
               type="number"
@@ -294,13 +293,13 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1.5">Category</label>
+            <label className="block text-sm font-medium mb-1.5">分类</label>
             <Select
               name="categoryId"
               value={form.categoryId}
               onChange={handleChange}
             >
-              <option value="">None</option>
+              <option value="">无</option>
               {categories.map((cat) => (
                 <option key={cat.id} value={cat.id}>
                   {cat.name}
@@ -321,7 +320,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
               }
               className="rounded"
             />
-            <span className="text-sm">Active</span>
+            <span className="text-sm">上架</span>
           </label>
           <label className="flex items-center gap-2">
             <input
@@ -333,14 +332,14 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
               }
               className="rounded"
             />
-            <span className="text-sm">Featured</span>
+            <span className="text-sm">推荐</span>
           </label>
         </div>
       </div>
 
       {/* Images */}
       <div className="bg-white rounded-xl border border-(--border) p-6 space-y-4">
-        <h2 className="font-semibold">Images</h2>
+        <h2 className="font-semibold">商品图片</h2>
         <div>
           <Input
             type="file"
@@ -354,7 +353,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
           />
           {uploading && (
             <p className="text-sm text-(--muted-foreground) mt-2">
-              Uploading...
+              上传中...
             </p>
           )}
         </div>
@@ -364,7 +363,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
               <img
                 key={idx}
                 src={url}
-                alt={`Image ${idx + 1}`}
+                alt={`图片 ${idx + 1}`}
                 className="size-20 object-cover rounded-lg border border-(--border)"
               />
             ))}
@@ -376,7 +375,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
       <div className="bg-white rounded-xl border border-(--border) p-6 space-y-4">
         <h2 className="font-semibold">SEO</h2>
         <div>
-          <label className="block text-sm font-medium mb-1.5">Meta Title</label>
+          <label className="block text-sm font-medium mb-1.5">Meta 标题</label>
           <Input
             name="metaTitle"
             value={form.metaTitle}
@@ -385,7 +384,7 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
         </div>
         <div>
           <label className="block text-sm font-medium mb-1.5">
-            Meta Description
+            Meta 描述
           </label>
           <Textarea
             name="metaDescription"
@@ -398,14 +397,14 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
 
       <div className="flex items-center gap-3">
         <Button variant="primary" type="submit" disabled={loading || uploading}>
-          {loading ? "Saving..." : initialData?.id ? "Update Product" : "Create Product"}
+          {loading ? "保存中..." : initialData?.id ? "更新商品" : "创建商品"}
         </Button>
         <Button
           variant="outline"
           type="button"
           onClick={() => router.back()}
         >
-          Cancel
+          取消
         </Button>
       </div>
     </form>

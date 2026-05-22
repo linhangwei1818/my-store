@@ -62,15 +62,15 @@ export default function AdminCategoriesPage() {
       });
 
       if (res.ok) {
-        toast.success(editing ? "Category updated" : "Category created");
+        toast.success(editing ? "分类已更新" : "分类已创建");
         setForm({ name: "", slug: "", description: "", sortOrder: "0" });
         setEditing(null);
         fetchCategories();
       } else {
-        toast.error("Failed to save category");
+        toast.error("操作失败");
       }
     } catch {
-      toast.error("Failed to save category");
+      toast.error("操作失败");
     }
   };
 
@@ -85,17 +85,17 @@ export default function AdminCategoriesPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Delete this category?")) return;
+    if (!confirm("确定要删除该分类吗？")) return;
     try {
       const res = await fetch(`/api/categories/${id}`, { method: "DELETE" });
       if (res.ok) {
-        toast.success("Category deleted");
+        toast.success("分类已删除");
         fetchCategories();
       } else {
-        toast.error("Failed to delete category");
+        toast.error("删除失败");
       }
     } catch {
-      toast.error("Failed to delete category");
+      toast.error("删除失败");
     }
   };
 
@@ -108,27 +108,26 @@ export default function AdminCategoriesPage() {
   };
 
   if (loading) {
-    return <div className="text-sm text-(--muted-foreground)">Loading...</div>;
+    return <div className="text-sm text-(--muted-foreground)">加载中...</div>;
   }
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-6">Categories</h1>
+      <h1 className="text-2xl font-bold mb-6">分类管理</h1>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Form */}
         <div className="bg-white rounded-xl border border-(--border) p-6">
           <h2 className="font-semibold mb-4">
-            {editing ? "Edit Category" : "New Category"}
+            {editing ? "编辑分类" : "新建分类"}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1.5">Name *</label>
+              <label className="block text-sm font-medium mb-1.5">名称 *</label>
               <Input
                 value={form.name}
                 onChange={handleNameChange}
                 required
-                placeholder="Category name"
+                placeholder="分类名称"
               />
             </div>
             <div>
@@ -142,7 +141,7 @@ export default function AdminCategoriesPage() {
             </div>
             <div>
               <label className="block text-sm font-medium mb-1.5">
-                Description
+                描述
               </label>
               <Textarea
                 value={form.description}
@@ -154,7 +153,7 @@ export default function AdminCategoriesPage() {
             </div>
             <div>
               <label className="block text-sm font-medium mb-1.5">
-                Sort Order
+                排序
               </label>
               <Input
                 type="number"
@@ -166,7 +165,7 @@ export default function AdminCategoriesPage() {
             </div>
             <div className="flex items-center gap-3">
               <Button variant="primary" type="submit">
-                {editing ? "Update" : "Create"}
+                {editing ? "更新" : "创建"}
               </Button>
               {editing && (
                 <Button
@@ -182,27 +181,26 @@ export default function AdminCategoriesPage() {
                     });
                   }}
                 >
-                  Cancel
+                  取消
                 </Button>
               )}
             </div>
           </form>
         </div>
 
-        {/* List */}
         <div>
           <div className="bg-white rounded-xl border border-(--border) overflow-hidden">
             {categories.length === 0 ? (
               <p className="p-6 text-sm text-(--muted-foreground)">
-                No categories yet.
+                暂无分类。
               </p>
             ) : (
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-(--border) text-left text-(--muted-foreground)">
-                    <th className="p-3 font-medium">Name</th>
-                    <th className="p-3 font-medium">Products</th>
-                    <th className="p-3 font-medium text-right">Actions</th>
+                    <th className="p-3 font-medium">名称</th>
+                    <th className="p-3 font-medium">商品数</th>
+                    <th className="p-3 font-medium text-right">操作</th>
                   </tr>
                 </thead>
                 <tbody>
