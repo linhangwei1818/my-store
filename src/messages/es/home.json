@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "overline": "Eleva Tu Espacio",
+    "title1": "Hermosa Decoración",
+    "title2": "Para Tu Hogar",
+    "subtitle": "Descubre nuestra colección curada de decoraciones artesanales. Cada pieza cuenta una historia y aporta calidez a tu espacio.",
+    "cta1": "Ver Colección",
+    "cta2": "Novedades"
+  },
+  "categories": {
+    "overline": "Colecciones Curadas",
+    "title": "Comprar por Categoría",
+    "count": "{count} productos"
+  },
+  "featured": {
+    "overline": "Seleccionado Para Ti",
+    "title": "Productos Destacados",
+    "viewAll": "Ver Todo",
+    "viewAllMobile": "Ver Todos los Productos"
+  },
+  "promise": {
+    "shipping": {
+      "title": "Envío Gratis",
+      "desc": "Envío gratuito en pedidos superiores a $50. Embalaje cuidadoso para llegar en perfectas condiciones."
+    },
+    "quality": {
+      "title": "Garantía de Calidad",
+      "desc": "Cada pieza es inspeccionada antes del envío. ¿No estás satisfecho? Devuélvelo en 30 días, sin preguntas."
+    },
+    "returns": {
+      "title": "Devoluciones Fáciles",
+      "desc": "Devoluciones sin complicaciones en 30 días. Tu satisfacción es nuestra prioridad — siempre."
+    }
+  },
+  "cta": {
+    "title": "Dale Vida a Tu Hogar",
+    "subtitle": "Explora nuestra última colección de arte mural, acentos decorativos y esenciales para el hogar diseñados para inspirar.",
+    "button": "Explorar Colección"
+  }
+}

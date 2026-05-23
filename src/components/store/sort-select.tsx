@@ -1,6 +1,8 @@
 "use client"
 
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "@/i18n/navigation"
+import { useSearchParams } from "next/navigation"
+import { useTranslations } from "next-intl"
 
 interface Props {
   currentSort: string
@@ -8,6 +10,7 @@ interface Props {
 }
 
 export function SortSelect({ currentSort, currentCategory }: Props) {
+  const t = useTranslations("product")
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -26,9 +29,9 @@ export function SortSelect({ currentSort, currentCategory }: Props) {
       defaultValue={currentSort}
       onChange={(e) => handleChange(e.target.value)}
     >
-      <option value="newest">Newest</option>
-      <option value="price-asc">Price: Low to High</option>
-      <option value="price-desc">Price: High to Low</option>
+      <option value="newest">{t("sort.newest")}</option>
+      <option value="price-asc">{t("sort.priceAsc")}</option>
+      <option value="price-desc">{t("sort.priceDesc")}</option>
     </select>
   )
 }

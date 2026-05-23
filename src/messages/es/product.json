@@ -1,0 +1,40 @@
+{
+  "badge": {
+    "sale": "Oferta",
+    "new": "Nuevo"
+  },
+  "card": {
+    "noImage": "Sin Imagen"
+  },
+  "listing": {
+    "title": "Todos los Productos",
+    "browseAll": "Explora nuestra colección completa de {total} productos",
+    "inCollection": "{total} producto{total, plural, =1 {} other {s}} en esta colección",
+    "categories": "Categorías",
+    "allProducts": "Todos los Productos",
+    "results": "{total} producto{total, plural, =1 {} other {s}}"
+  },
+  "detail": {
+    "inStock": "En Stock",
+    "available": " — {count} disponible{count, plural, =1 {} other {s}}",
+    "outOfStock": "Agotado",
+    "sku": "SKU",
+    "save": "Ahorra {percent}%",
+    "addToCart": "Añadir al Carrito",
+    "addedToCart": "{name} añadido al carrito",
+    "askAbout": "Consultar sobre este producto",
+    "description": "Descripción"
+  },
+  "sort": {
+    "newest": "Más Reciente",
+    "priceAsc": "Precio: Menor a Mayor",
+    "priceDesc": "Precio: Mayor a Menor"
+  },
+  "gallery": {
+    "noImage": "Imagen No Disponible",
+    "productImage": "Imagen del producto"
+  },
+  "grid": {
+    "noProducts": "No se encontraron productos."
+  }
+}

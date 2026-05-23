@@ -1,0 +1,36 @@
+{
+  "brand": "ArtisanHome",
+  "brandShort": "AH",
+  "header": {
+    "home": "ホーム",
+    "shop": "ショップ",
+    "newArrivals": "新着",
+    "contact": "お問い合わせ"
+  },
+  "footer": {
+    "tagline": "モダンな暮らしのための美しいインテリア。一つ一つ丁寧に作られ、あなたの家に温もりとスタイルをもたらします。",
+    "shop": "ショップ",
+    "allProducts": "すべての商品",
+    "newArrivals": "新着",
+    "search": "検索",
+    "support": "サポート",
+    "contactUs": "お問い合わせ",
+    "shippingPolicy": "配送ポリシー",
+    "returns": "返品",
+    "company": "会社概要",
+    "privacyPolicy": "プライバシーポリシー",
+    "termsOfService": "利用規約",
+    "copyright": "© {year} ArtisanHome. All rights reserved."
+  },
+  "whatsapp": {
+    "title": "WhatsAppでお問い合わせ",
+    "message": "こんにちは！商品について興味があります。"
+  },
+  "search": {
+    "results": "\"{query}\" の検索結果 {count} 件"
+  },
+  "breadcrumbs": {
+    "home": "ホーム",
+    "products": "商品"
+  }
+}

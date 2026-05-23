@@ -1,0 +1,25 @@
+{
+  "drawer": {
+    "title": "장바구니 ({count})",
+    "empty": "장바구니가 비어 있습니다",
+    "startShopping": "쇼핑 시작하기",
+    "subtotal": "소계",
+    "viewCart": "장바구니 보기",
+    "checkout": "결제하기"
+  },
+  "page": {
+    "title": "장바구니 ({count})",
+    "empty": "장바구니가 비어 있습니다",
+    "emptyMessage": "아직 장바구니에 상품을 추가하지 않으신 것 같습니다.",
+    "browseProducts": "상품 둘러보기",
+    "remove": "삭제",
+    "continueShopping": "쇼핑 계속하기",
+    "orderSummary": "주문 요약",
+    "subtotal": "소계",
+    "shipping": "배송비",
+    "free": "무료",
+    "freeShippingNotice": "{threshold} 이상 주문 시 무료 배송",
+    "total": "합계",
+    "proceedToCheckout": "결제 진행하기"
+  }
+}

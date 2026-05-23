@@ -1,0 +1,40 @@
+{
+  "hero": {
+    "overline": "Elevate Your Space",
+    "title1": "Beautiful Decor",
+    "title2": "For Your Home",
+    "subtitle": "Discover our curated collection of artisanal decorations. Each piece tells a story and brings warmth to your living space.",
+    "cta1": "Shop Collection",
+    "cta2": "New Arrivals"
+  },
+  "categories": {
+    "overline": "Curated Collections",
+    "title": "Shop by Category",
+    "count": "{count} products"
+  },
+  "featured": {
+    "overline": "Handpicked For You",
+    "title": "Featured Products",
+    "viewAll": "View All",
+    "viewAllMobile": "View All Products"
+  },
+  "promise": {
+    "shipping": {
+      "title": "Free Shipping",
+      "desc": "Complimentary shipping on all orders over $50. Carefully packaged to arrive in perfect condition."
+    },
+    "quality": {
+      "title": "Quality Guarantee",
+      "desc": "Every piece is inspected before shipping. Not satisfied? Return within 30 days, no questions asked."
+    },
+    "returns": {
+      "title": "Easy Returns",
+      "desc": "Hassle-free returns within 30 days. Your satisfaction is our priority — always."
+    }
+  },
+  "cta": {
+    "title": "Bring Your Home to Life",
+    "subtitle": "Explore our latest collection of wall art, decorative accents, and home essentials designed to inspire.",
+    "button": "Explore Collection"
+  }
+}

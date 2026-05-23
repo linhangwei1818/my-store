@@ -1,0 +1,40 @@
+{
+  "badge": {
+    "sale": "Sale",
+    "new": "New"
+  },
+  "card": {
+    "noImage": "No Image"
+  },
+  "listing": {
+    "title": "All Products",
+    "browseAll": "Browse our complete collection of {total} products",
+    "inCollection": "{total} product{total, plural, =1 {} other {s}} in this collection",
+    "categories": "Categories",
+    "allProducts": "All Products",
+    "results": "{total} product{total, plural, =1 {} other {s}}"
+  },
+  "detail": {
+    "inStock": "In Stock",
+    "available": " — {count} available",
+    "outOfStock": "Out of Stock",
+    "sku": "SKU",
+    "save": "Save {percent}%",
+    "addToCart": "Add to Cart",
+    "addedToCart": "{name} added to cart",
+    "askAbout": "Ask about this product",
+    "description": "Description"
+  },
+  "sort": {
+    "newest": "Newest",
+    "priceAsc": "Price: Low to High",
+    "priceDesc": "Price: High to Low"
+  },
+  "gallery": {
+    "noImage": "No Image Available",
+    "productImage": "Product image"
+  },
+  "grid": {
+    "noProducts": "No products found."
+  }
+}

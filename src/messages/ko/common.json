@@ -1,0 +1,36 @@
+{
+  "brand": "ArtisanHome",
+  "brandShort": "AH",
+  "header": {
+    "home": "홈",
+    "shop": "쇼핑",
+    "newArrivals": "신상품",
+    "contact": "문의하기"
+  },
+  "footer": {
+    "tagline": "모던한 생활을 위한 아름다운 장식. 각 제품은 정성껏 제작되어 당신의 집에 따뜻함과 스타일을 더합니다.",
+    "shop": "쇼핑",
+    "allProducts": "전체 상품",
+    "newArrivals": "신상품",
+    "search": "검색",
+    "support": "고객 지원",
+    "contactUs": "문의하기",
+    "shippingPolicy": "배송 정책",
+    "returns": "반품",
+    "company": "회사 정보",
+    "privacyPolicy": "개인정보 처리방침",
+    "termsOfService": "이용 약관",
+    "copyright": "© {year} ArtisanHome. All rights reserved."
+  },
+  "whatsapp": {
+    "title": "WhatsApp으로 문의하기",
+    "message": "안녕하세요! 제품에 관심이 있습니다."
+  },
+  "search": {
+    "results": "\"{query}\"에 대한 {count}개의 결과"
+  },
+  "breadcrumbs": {
+    "home": "홈",
+    "products": "상품"
+  }
+}

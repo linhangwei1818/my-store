@@ -1,0 +1,32 @@
+{
+  "title": "チェックアウト",
+  "contactInfo": "連絡先情報",
+  "email": "メールアドレス",
+  "emailPlaceholder": "example@email.com",
+  "fullName": "お名前",
+  "namePlaceholder": "山田 太郎",
+  "shippingAddress": "配送先住所",
+  "addressLine1": "住所1行目",
+  "addressPlaceholder1": "東京都渋谷区 1-2-3",
+  "addressLine2": "住所2行目",
+  "addressPlaceholder2": "マンション 4B",
+  "city": "市区町村",
+  "state": "都道府県",
+  "postalCode": "郵便番号",
+  "country": "国",
+  "orderSummary": "注文サマリー",
+  "subtotal": "小計",
+  "shipping": "配送料",
+  "free": "無料",
+  "total": "合計",
+  "payWithStripe": "Stripeで支払う",
+  "processing": "処理中...",
+  "error": "エラーが発生しました",
+  "errorCheckout": "チェックアウト処理に失敗しました",
+  "success": {
+    "title": "注文確定！",
+    "message": "ご購入ありがとうございます。ご注文を受け付け、処理を開始しました。確認メールを {email} にお送りします。",
+    "continueShopping": "買い物を続ける",
+    "goHome": "ホームへ"
+  }
+}

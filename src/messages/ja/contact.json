@@ -1,0 +1,20 @@
+{
+  "overline": "お問い合わせ",
+  "title": "お問い合わせ",
+  "subtitle": "商品についてのご質問やカスタマイズのご依頼は、お気軽にお問い合わせください。",
+  "form": {
+    "name": "お名前",
+    "namePlaceholder": "お名前を入力",
+    "email": "メールアドレス",
+    "emailPlaceholder": "your@email.com",
+    "subject": "件名",
+    "subjectPlaceholder": "{productName}についてのお問い合わせ",
+    "subjectPlaceholderDefault": "商品についてのお問い合わせ",
+    "message": "メッセージ",
+    "messagePlaceholder": "ご質問やご要望を記入してください...",
+    "submit": "送信する",
+    "sending": "送信中...",
+    "success": "メッセージを送信しました。確認後すぐにご連絡いたします。",
+    "error": "送信に失敗しました。後ほど再度お試しください。"
+  }
+}

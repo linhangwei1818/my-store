@@ -1,3 +1,6 @@
+"use client"
+
+import { useTranslations } from "next-intl";
 import { ProductCard } from "./product-card";
 
 interface ProductGridProps {
@@ -12,10 +15,12 @@ interface ProductGridProps {
 }
 
 export function ProductGrid({ products }: ProductGridProps) {
+  const t = useTranslations("product");
+
   if (products.length === 0) {
     return (
       <div className="text-center py-12 text-(--muted-foreground)">
-        No products found.
+        {t("grid.noProducts")}
       </div>
     );
   }

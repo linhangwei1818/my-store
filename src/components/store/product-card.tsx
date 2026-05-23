@@ -1,4 +1,7 @@
-import Link from "next/link";
+"use client"
+
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatPrice } from "@/lib/utils";
 
@@ -14,6 +17,8 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const t = useTranslations("product");
+  const locale = useLocale();
   const image = product.images[0];
   const hasSale = product.compareAtPrice && product.compareAtPrice > product.price;
   const isNew =
@@ -32,7 +37,7 @@ export function ProductCard({ product }: ProductCardProps) {
             />
           ) : (
             <div className="size-full flex items-center justify-center text-stone-400">
-              <span className="text-sm">No Image</span>
+              <span className="text-sm">{t("card.noImage")}</span>
             </div>
           )}
 
@@ -40,12 +45,12 @@ export function ProductCard({ product }: ProductCardProps) {
           <div className="absolute top-3 left-3 flex flex-col gap-1.5">
             {hasSale && (
               <span className="px-2.5 py-1 text-xs font-semibold bg-red-500 text-white rounded-full">
-                Sale
+                {t("badge.sale")}
               </span>
             )}
             {isNew && (
               <span className="px-2.5 py-1 text-xs font-semibold bg-emerald-600 text-white rounded-full">
-                New
+                {t("badge.new")}
               </span>
             )}
           </div>
@@ -59,11 +64,11 @@ export function ProductCard({ product }: ProductCardProps) {
           </h3>
           <div className="flex items-center gap-2">
             <span className="font-semibold text-sm text-stone-900">
-              {formatPrice(product.price)}
+              {formatPrice(product.price, locale)}
             </span>
             {hasSale && (
               <span className="text-xs text-(--muted-foreground) line-through">
-                {formatPrice(product.compareAtPrice!)}
+                {formatPrice(product.compareAtPrice!, locale)}
               </span>
             )}
           </div>

@@ -1,0 +1,40 @@
+{
+  "badge": {
+    "sale": "セール",
+    "new": "新着"
+  },
+  "card": {
+    "noImage": "画像なし"
+  },
+  "listing": {
+    "title": "すべての商品",
+    "browseAll": "{total}点の商品コレクションをご覧ください",
+    "inCollection": "このコレクションの商品 {total} 点",
+    "categories": "カテゴリー",
+    "allProducts": "すべての商品",
+    "results": "{total} 点の商品"
+  },
+  "detail": {
+    "inStock": "在庫あり",
+    "available": " — {count} 点在庫",
+    "outOfStock": "在庫切れ",
+    "sku": "SKU",
+    "save": "{percent}% OFF",
+    "addToCart": "カートに入れる",
+    "addedToCart": "{name} をカートに追加しました",
+    "askAbout": "この商品について問い合わせる",
+    "description": "商品説明"
+  },
+  "sort": {
+    "newest": "新着順",
+    "priceAsc": "価格：安い順",
+    "priceDesc": "価格：高い順"
+  },
+  "gallery": {
+    "noImage": "画像はありません",
+    "productImage": "商品画像"
+  },
+  "grid": {
+    "noProducts": "商品が見つかりません。"
+  }
+}

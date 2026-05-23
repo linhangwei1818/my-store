@@ -1,11 +1,13 @@
 "use client"
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "";
 const ENABLED = Boolean(WHATSAPP_NUMBER);
 
 export function WhatsAppButton() {
+  const t = useTranslations("common");
   const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
@@ -17,7 +19,7 @@ export function WhatsAppButton() {
   if (!ENABLED) return null;
 
   const message = encodeURIComponent(
-    `Hi! I'm interested in your products.\n\nPage: ${typeof window !== "undefined" ? window.location.href : ""}`
+    `${t("whatsapp.message")}\n\nPage: ${typeof window !== "undefined" ? window.location.href : ""}`
   );
 
   return (
@@ -28,7 +30,7 @@ export function WhatsAppButton() {
       className={`fixed bottom-6 right-6 z-50 size-14 flex items-center justify-center bg-green-500 text-white rounded-full shadow-lg hover:bg-green-600 hover:scale-110 active:scale-95 transition-all duration-300 ${
         visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
       }`}
-      title="Chat with us on WhatsApp"
+      title={t("whatsapp.title")}
     >
       <svg
         viewBox="0 0 24 24"

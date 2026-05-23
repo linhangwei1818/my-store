@@ -1,0 +1,32 @@
+{
+  "title": "Finalizar Compra",
+  "contactInfo": "Información de Contacto",
+  "email": "Correo Electrónico",
+  "emailPlaceholder": "tu@email.com",
+  "fullName": "Nombre Completo",
+  "namePlaceholder": "Juan Pérez",
+  "shippingAddress": "Dirección de Envío",
+  "addressLine1": "Dirección Línea 1",
+  "addressPlaceholder1": "Calle Principal 123",
+  "addressLine2": "Dirección Línea 2",
+  "addressPlaceholder2": "Depto 4B",
+  "city": "Ciudad",
+  "state": "Estado/Provincia",
+  "postalCode": "Código Postal",
+  "country": "País",
+  "orderSummary": "Resumen del Pedido",
+  "subtotal": "Subtotal",
+  "shipping": "Envío",
+  "free": "Gratis",
+  "total": "Total",
+  "payWithStripe": "Pagar con Stripe",
+  "processing": "Procesando...",
+  "error": "Algo salió mal",
+  "errorCheckout": "Error al procesar el pago",
+  "success": {
+    "title": "¡Pedido Confirmado!",
+    "message": "Gracias por tu compra. Tu pedido ha sido recibido y está siendo procesado. Se enviará un correo de confirmación a {email}.",
+    "continueShopping": "Seguir Comprando",
+    "goHome": "Ir al Inicio"
+  }
+}

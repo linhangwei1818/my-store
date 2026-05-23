@@ -1,6 +1,7 @@
 "use client"
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { useCartStore } from "@/store/cart-store";
 import toast from "react-hot-toast";
@@ -17,6 +18,7 @@ interface AddToCartProps {
 }
 
 export function AddToCart({ product }: AddToCartProps) {
+  const t = useTranslations("product");
   const [quantity, setQuantity] = useState(1);
   const addItem = useCartStore((s) => s.addItem);
   const maxQty = product.inventory === -1 ? 99 : product.inventory;
@@ -31,7 +33,7 @@ export function AddToCart({ product }: AddToCartProps) {
       maxQuantity: maxQty,
       quantity,
     });
-    toast.success(`${product.name} added to cart`);
+    toast.success(t("detail.addedToCart", { name: product.name }));
     setQuantity(1);
   };
 
@@ -57,7 +59,7 @@ export function AddToCart({ product }: AddToCartProps) {
         </button>
       </div>
       <Button variant="primary" size="lg" onClick={handleAdd}>
-        Add to Cart
+        {t("detail.addToCart")}
       </Button>
     </div>
   );

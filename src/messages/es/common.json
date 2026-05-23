@@ -1,0 +1,36 @@
+{
+  "brand": "ArtisanHome",
+  "brandShort": "AH",
+  "header": {
+    "home": "Inicio",
+    "shop": "Tienda",
+    "newArrivals": "Novedades",
+    "contact": "Contacto"
+  },
+  "footer": {
+    "tagline": "Hermosas decoraciones para la vida moderna. Cada pieza está hecha con cuidado para aportar calidez y estilo a tu hogar.",
+    "shop": "Tienda",
+    "allProducts": "Todos los Productos",
+    "newArrivals": "Novedades",
+    "search": "Buscar",
+    "support": "Soporte",
+    "contactUs": "Contacto",
+    "shippingPolicy": "Política de Envío",
+    "returns": "Devoluciones",
+    "company": "Empresa",
+    "privacyPolicy": "Política de Privacidad",
+    "termsOfService": "Términos de Servicio",
+    "copyright": "© {year} ArtisanHome. Todos los derechos reservados."
+  },
+  "whatsapp": {
+    "title": "Chatea con nosotros en WhatsApp",
+    "message": "¡Hola! Estoy interesado en sus productos."
+  },
+  "search": {
+    "results": "{count} resultado{count, plural, =1 {} other {s}} para \"{query}\""
+  },
+  "breadcrumbs": {
+    "home": "Inicio",
+    "products": "Productos"
+  }
+}

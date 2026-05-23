@@ -1,0 +1,32 @@
+{
+  "title": "Checkout",
+  "contactInfo": "Contact Information",
+  "email": "Email",
+  "emailPlaceholder": "you@example.com",
+  "fullName": "Full Name",
+  "namePlaceholder": "John Doe",
+  "shippingAddress": "Shipping Address",
+  "addressLine1": "Address Line 1",
+  "addressPlaceholder1": "123 Main St",
+  "addressLine2": "Address Line 2",
+  "addressPlaceholder2": "Apt 4B",
+  "city": "City",
+  "state": "State",
+  "postalCode": "Postal Code",
+  "country": "Country",
+  "orderSummary": "Order Summary",
+  "subtotal": "Subtotal",
+  "shipping": "Shipping",
+  "free": "Free",
+  "total": "Total",
+  "payWithStripe": "Pay with Stripe",
+  "processing": "Processing...",
+  "error": "Something went wrong",
+  "errorCheckout": "Failed to process checkout",
+  "success": {
+    "title": "Order Confirmed!",
+    "message": "Thank you for your purchase. Your order has been received and is being processed. A confirmation email will be sent to {email}.",
+    "continueShopping": "Continue Shopping",
+    "goHome": "Go Home"
+  }
+}

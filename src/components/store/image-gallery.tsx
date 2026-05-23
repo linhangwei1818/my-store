@@ -1,17 +1,19 @@
 "use client"
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface ImageGalleryProps {
   images: { url: string; alt: string | null }[];
 }
 
 export function ImageGallery({ images }: ImageGalleryProps) {
+  const t = useTranslations("product");
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (images.length === 0) {
     return (
       <div className="aspect-square bg-(--muted) rounded-xl flex items-center justify-center text-(--muted-foreground)">
-        No Image Available
+        {t("gallery.noImage")}
       </div>
     );
   }
@@ -21,7 +23,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
       <div className="aspect-square bg-(--muted) rounded-xl overflow-hidden">
         <img
           src={images[activeIndex].url}
-          alt={images[activeIndex].alt || "Product image"}
+          alt={images[activeIndex].alt || t("gallery.productImage")}
           className="size-full object-cover"
         />
       </div>
@@ -39,7 +41,7 @@ export function ImageGallery({ images }: ImageGalleryProps) {
             >
               <img
                 src={image.url}
-                alt={image.alt || `Product image ${index + 1}`}
+                alt={image.alt || t("gallery.productImage")}
                 className="size-full object-cover"
               />
             </button>

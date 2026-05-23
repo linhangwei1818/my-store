@@ -1,0 +1,32 @@
+{
+  "title": "결제",
+  "contactInfo": "연락처 정보",
+  "email": "이메일",
+  "emailPlaceholder": "example@email.com",
+  "fullName": "이름",
+  "namePlaceholder": "홍길동",
+  "shippingAddress": "배송지 주소",
+  "addressLine1": "주소 1",
+  "addressPlaceholder1": "서울특별시 강남구 테헤란로 123",
+  "addressLine2": "주소 2",
+  "addressPlaceholder2": "4B호",
+  "city": "도시",
+  "state": "시/도",
+  "postalCode": "우편번호",
+  "country": "국가",
+  "orderSummary": "주문 요약",
+  "subtotal": "소계",
+  "shipping": "배송비",
+  "free": "무료",
+  "total": "합계",
+  "payWithStripe": "Stripe로 결제하기",
+  "processing": "처리 중...",
+  "error": "오류가 발생했습니다",
+  "errorCheckout": "결제 처리에 실패했습니다",
+  "success": {
+    "title": "주문 확정!",
+    "message": "구매해 주셔서 감사합니다. 주문이 접수되어 처리 중입니다. 확인 이메일이 {email}로 발송됩니다.",
+    "continueShopping": "쇼핑 계속하기",
+    "goHome": "홈으로"
+  }
+}

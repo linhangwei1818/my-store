@@ -1,12 +1,15 @@
 "use client"
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { ShoppingCart, X, Minus, Plus, Trash2 } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { useCartStore } from "@/store/cart-store";
 import { formatPrice } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 export function CartDrawer() {
+  const t = useTranslations("cart");
+  const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
   const { items, removeItem, updateQuantity, itemCount, subtotal } = useCartStore();
   const count = itemCount();
@@ -45,7 +48,7 @@ export function CartDrawer() {
           <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
             <div className="flex items-center justify-between p-5 border-b border-(--border)">
               <h2 className="text-lg font-semibold text-stone-900">
-                Cart ({count} {count === 1 ? "item" : "items"})
+                {t("drawer.title", { count })}
               </h2>
               <button
                 onClick={() => setIsOpen(false)}
@@ -60,10 +63,10 @@ export function CartDrawer() {
                 <div className="size-20 flex items-center justify-center rounded-full bg-stone-100">
                   <ShoppingCart className="size-8 text-stone-400" />
                 </div>
-                <p className="text-(--muted-foreground)">Your cart is empty</p>
+                <p className="text-(--muted-foreground)">{t("drawer.empty")}</p>
                 <Link href="/products" onClick={() => setIsOpen(false)}>
                   <Button variant="primary" size="sm">
-                    Start Shopping
+                    {t("drawer.startShopping")}
                   </Button>
                 </Link>
               </div>
@@ -93,7 +96,7 @@ export function CartDrawer() {
                           {item.name}
                         </Link>
                         <p className="text-sm font-semibold mt-0.5 text-stone-900">
-                          {formatPrice(item.price)}
+                          {formatPrice(item.price, locale)}
                         </p>
                         <div className="flex items-center gap-2 mt-2">
                           <button
@@ -129,8 +132,8 @@ export function CartDrawer() {
 
                 <div className="border-t border-(--border) p-5 space-y-3">
                   <div className="flex items-center justify-between font-semibold text-stone-900">
-                    <span>Subtotal</span>
-                    <span>{formatPrice(subtotal())}</span>
+                    <span>{t("drawer.subtotal")}</span>
+                    <span>{formatPrice(subtotal(), locale)}</span>
                   </div>
                   <Link
                     href="/cart"
@@ -138,7 +141,7 @@ export function CartDrawer() {
                     className="block"
                   >
                     <Button variant="outline" className="w-full">
-                      View Cart
+                      {t("drawer.viewCart")}
                     </Button>
                   </Link>
                   <Link
@@ -147,7 +150,7 @@ export function CartDrawer() {
                     className="block"
                   >
                     <Button variant="primary" className="w-full">
-                      Checkout
+                      {t("drawer.checkout")}
                     </Button>
                   </Link>
                 </div>

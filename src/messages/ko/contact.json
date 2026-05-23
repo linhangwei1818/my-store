@@ -1,0 +1,20 @@
+{
+  "overline": "문의하기",
+  "title": "문의하기",
+  "subtitle": "제품에 대해 궁금한 점이 있으신가요? 맞춤 제작을 원하시나요? 언제든 연락 주세요.",
+  "form": {
+    "name": "이름",
+    "namePlaceholder": "이름을 입력하세요",
+    "email": "이메일",
+    "emailPlaceholder": "your@email.com",
+    "subject": "제목",
+    "subjectPlaceholder": "{productName}에 관한 문의",
+    "subjectPlaceholderDefault": "제품에 관한 문의",
+    "message": "메시지",
+    "messagePlaceholder": "질문이나 요구사항을 설명해 주세요...",
+    "submit": "메시지 보내기",
+    "sending": "전송 중...",
+    "success": "메시지가 전송되었습니다! 곧 연락 드리겠습니다.",
+    "error": "전송에 실패했습니다. 나중에 다시 시도해 주세요."
+  }
+}

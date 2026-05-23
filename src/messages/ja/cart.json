@@ -1,0 +1,25 @@
+{
+  "drawer": {
+    "title": "カート ({count})",
+    "empty": "カートは空です",
+    "startShopping": "買い物を始める",
+    "subtotal": "小計",
+    "viewCart": "カートを見る",
+    "checkout": "レジに進む"
+  },
+  "page": {
+    "title": "ショッピングカート ({count})",
+    "empty": "カートは空です",
+    "emptyMessage": "まだカートに商品が追加されていないようです。",
+    "browseProducts": "商品を見る",
+    "remove": "削除",
+    "continueShopping": "買い物を続ける",
+    "orderSummary": "注文サマリー",
+    "subtotal": "小計",
+    "shipping": "配送料",
+    "free": "無料",
+    "freeShippingNotice": "{threshold}以上のご注文で送料無料",
+    "total": "合計",
+    "proceedToCheckout": "レジに進む"
+  }
+}

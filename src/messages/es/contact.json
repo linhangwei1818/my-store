@@ -1,0 +1,20 @@
+{
+  "overline": "Contáctanos",
+  "title": "Contacto",
+  "subtitle": "¿Tienes preguntas sobre nuestros productos? ¿Quieres personalizar una pieza? Nos encantaría saber de ti.",
+  "form": {
+    "name": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "email": "Correo Electrónico",
+    "emailPlaceholder": "tu@email.com",
+    "subject": "Asunto",
+    "subjectPlaceholder": "Consulta sobre {productName}",
+    "subjectPlaceholderDefault": "Consulta sobre nuestros productos",
+    "message": "Mensaje",
+    "messagePlaceholder": "Describe tu pregunta o requisitos...",
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado! Te responderemos pronto.",
+    "error": "Error al enviar. Inténtalo de nuevo más tarde."
+  }
+}

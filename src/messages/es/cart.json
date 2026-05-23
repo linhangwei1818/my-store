@@ -1,0 +1,25 @@
+{
+  "drawer": {
+    "title": "Carrito ({count})",
+    "empty": "Tu carrito está vacío",
+    "startShopping": "Comenzar a Comprar",
+    "subtotal": "Subtotal",
+    "viewCart": "Ver Carrito",
+    "checkout": "Pagar"
+  },
+  "page": {
+    "title": "Carrito de Compras ({count})",
+    "empty": "Tu Carrito Está Vacío",
+    "emptyMessage": "Parece que aún no has añadido nada a tu carrito.",
+    "browseProducts": "Explorar Productos",
+    "remove": "Eliminar",
+    "continueShopping": "Seguir Comprando",
+    "orderSummary": "Resumen del Pedido",
+    "subtotal": "Subtotal",
+    "shipping": "Envío",
+    "free": "Gratis",
+    "freeShippingNotice": "Envío gratis en pedidos superiores a {threshold}",
+    "total": "Total",
+    "proceedToCheckout": "Proceder al Pago"
+  }
+}
