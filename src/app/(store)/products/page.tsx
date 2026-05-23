@@ -71,21 +71,35 @@ export default async function ProductsPage({
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-      <div className="flex flex-col md:flex-row gap-8">
+    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      {/* Page Header */}
+      <div className="mb-10">
+        <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-2">
+          {currentCategory
+            ? categories.find((c) => c.slug === currentCategory)?.name || "Products"
+            : "All Products"}
+        </h1>
+        <p className="text-(--muted-foreground)">
+          {currentCategory
+            ? `${total} product${total !== 1 ? "s" : ""} in this collection`
+            : `Browse our complete collection of ${total} products`}
+        </p>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-10">
         {/* Sidebar filters */}
         <aside className="w-full md:w-56 flex-shrink-0">
-          <div className="space-y-6">
+          <div className="md:sticky md:top-24 space-y-6">
             <div>
-              <h3 className="font-semibold text-sm mb-3">Categories</h3>
+              <h3 className="font-semibold text-sm mb-4 text-stone-900">Categories</h3>
               <ul className="space-y-1">
                 <li>
                   <a
                     href={buildUrl({ category: null })}
-                    className={`text-sm block py-1 px-2 rounded-lg transition-colors ${
+                    className={`text-sm block py-2 px-3 rounded-lg transition-colors ${
                       !currentCategory
                         ? "bg-(--accent) text-(--accent-foreground) font-medium"
-                        : "text-(--muted-foreground) hover:text-(--foreground)"
+                        : "text-(--muted-foreground) hover:text-(--foreground) hover:bg-stone-50"
                     }`}
                   >
                     All Products
@@ -95,13 +109,14 @@ export default async function ProductsPage({
                   <li key={cat.id}>
                     <a
                       href={buildUrl({ category: cat.slug })}
-                      className={`text-sm block py-1 px-2 rounded-lg transition-colors ${
+                      className={`text-sm flex items-center justify-between py-2 px-3 rounded-lg transition-colors ${
                         currentCategory === cat.slug
                           ? "bg-(--accent) text-(--accent-foreground) font-medium"
-                          : "text-(--muted-foreground) hover:text-(--foreground)"
+                          : "text-(--muted-foreground) hover:text-(--foreground) hover:bg-stone-50"
                       }`}
                     >
-                      {cat.name} ({cat._count.products})
+                      <span>{cat.name}</span>
+                      <span className="text-xs opacity-60">{cat._count.products}</span>
                     </a>
                   </li>
                 ))}
@@ -115,7 +130,6 @@ export default async function ProductsPage({
           <div className="flex items-center justify-between mb-6">
             <p className="text-sm text-(--muted-foreground)">
               {total} product{total !== 1 ? "s" : ""}
-              {currentCategory && ` in this category`}
             </p>
             <SortSelect currentSort={currentSort} currentCategory={currentCategory} />
           </div>
@@ -124,15 +138,15 @@ export default async function ProductsPage({
 
           {/* Pagination */}
           {pages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-8">
+            <div className="flex items-center justify-center gap-2 mt-12">
               {Array.from({ length: pages }, (_, i) => i + 1).map((p) => (
                 <a
                   key={p}
                   href={buildUrl({ page: String(p) })}
-                  className={`size-9 flex items-center justify-center rounded-lg text-sm font-medium transition-colors ${
+                  className={`size-10 flex items-center justify-center rounded-xl text-sm font-medium transition-all ${
                     p === page
-                      ? "bg-(--primary) text-(--primary-foreground)"
-                      : "text-(--muted-foreground) hover:bg-(--muted)"
+                      ? "bg-stone-900 text-white shadow-md"
+                      : "text-(--muted-foreground) hover:bg-stone-100 hover:text-stone-900"
                   }`}
                 >
                   {p}

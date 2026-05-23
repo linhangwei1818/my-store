@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
@@ -93,45 +94,63 @@ export default async function ProductPage({
         ]}
       />
 
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
         <ImageGallery images={product.images} />
 
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold mb-2">{product.name}</h1>
+          {product.category && (
+            <Link
+              href={`/categories/${product.category.slug}`}
+              className="text-sm font-medium text-(--primary) hover:text-(--primary-hover) transition-colors"
+            >
+              {product.category.name}
+            </Link>
+          )}
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mt-2 mb-3 text-stone-900">
+            {product.name}
+          </h1>
           {product.shortDescription && (
-            <p className="text-(--muted-foreground) mb-4">
+            <p className="text-(--muted-foreground) mb-6 leading-relaxed">
               {product.shortDescription}
             </p>
           )}
 
-          <div className="flex items-baseline gap-3 mb-6">
-            <span className="text-2xl font-bold">{formatPrice(product.price)}</span>
+          <div className="flex items-baseline gap-4 mb-6">
+            <span className="text-3xl font-bold text-stone-900">
+              {formatPrice(product.price)}
+            </span>
             {hasSale && (
-              <span className="text-lg text-(--muted-foreground) line-through">
+              <span className="text-xl text-(--muted-foreground) line-through">
                 {formatPrice(product.compareAtPrice!)}
+              </span>
+            )}
+            {hasSale && (
+              <span className="text-sm font-semibold text-red-500 bg-red-50 px-2.5 py-1 rounded-full">
+                Save {Math.round(((product.compareAtPrice! - product.price) / product.compareAtPrice!) * 100)}%
               </span>
             )}
           </div>
 
-          <div className="mb-6">
+          <div className="flex items-center gap-6 mb-8 text-sm">
             {inStock ? (
-              <span className="text-sm text-green-600 font-medium">
-                In Stock
-                {product.inventory > 0 && ` (${product.inventory} available)`}
+              <span className="flex items-center gap-1.5 text-emerald-700 font-medium">
+                <span className="size-2 rounded-full bg-emerald-500 inline-block" />
+                In Stock{product.inventory > 0 ? ` — ${product.inventory} available` : ""}
               </span>
             ) : (
-              <span className="text-sm text-red-600 font-medium">Out of Stock</span>
+              <span className="flex items-center gap-1.5 text-red-600 font-medium">
+                <span className="size-2 rounded-full bg-red-500 inline-block" />
+                Out of Stock
+              </span>
             )}
-            <span className="text-sm text-(--muted-foreground) ml-4">
-              SKU: {product.sku}
-            </span>
+            <span className="text-(--muted-foreground)">SKU: {product.sku}</span>
           </div>
 
           {inStock && <AddToCart product={product} />}
 
-          <div className="mt-8 border-t border-(--border) pt-8">
-            <h3 className="font-semibold mb-3">Description</h3>
-            <div className="prose prose-sm text-(--muted-foreground) whitespace-pre-wrap">
+          <div className="mt-10 border-t border-(--border) pt-10">
+            <h2 className="font-semibold text-lg mb-4 text-stone-900">Description</h2>
+            <div className="prose prose-stone prose-sm max-w-none text-(--muted-foreground) whitespace-pre-wrap leading-relaxed">
               {product.description}
             </div>
           </div>

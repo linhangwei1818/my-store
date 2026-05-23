@@ -42,22 +42,24 @@ export function CartDrawer() {
             className="absolute inset-0 bg-black/40"
             onClick={() => setIsOpen(false)}
           />
-          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-xl flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b border-(--border)">
-              <h2 className="text-lg font-semibold">
+          <div className="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl flex flex-col">
+            <div className="flex items-center justify-between p-5 border-b border-(--border)">
+              <h2 className="text-lg font-semibold text-stone-900">
                 Cart ({count} {count === 1 ? "item" : "items"})
               </h2>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-(--muted) rounded-lg"
+                className="p-1.5 hover:bg-stone-100 rounded-xl transition-colors"
               >
                 <X className="size-5" />
               </button>
             </div>
 
             {items.length === 0 ? (
-              <div className="flex-1 flex flex-col items-center justify-center gap-3 p-6">
-                <ShoppingCart className="size-12 text-(--muted-foreground)" />
+              <div className="flex-1 flex flex-col items-center justify-center gap-4 p-6">
+                <div className="size-20 flex items-center justify-center rounded-full bg-stone-100">
+                  <ShoppingCart className="size-8 text-stone-400" />
+                </div>
                 <p className="text-(--muted-foreground)">Your cart is empty</p>
                 <Link href="/products" onClick={() => setIsOpen(false)}>
                   <Button variant="primary" size="sm">
@@ -71,9 +73,9 @@ export function CartDrawer() {
                   {items.map((item) => (
                     <div
                       key={item.productId}
-                      className="flex gap-3 p-3 rounded-lg border border-(--border)"
+                      className="flex gap-3 p-3 rounded-xl border border-(--border) hover:border-(--primary)/20 transition-colors"
                     >
-                      <div className="size-16 rounded-lg bg-(--muted) flex-shrink-0 overflow-hidden">
+                      <div className="size-16 rounded-xl bg-stone-100 flex-shrink-0 overflow-hidden">
                         {item.image && (
                           <img
                             src={item.image}
@@ -86,11 +88,11 @@ export function CartDrawer() {
                         <Link
                           href={`/products/${item.slug}`}
                           onClick={() => setIsOpen(false)}
-                          className="text-sm font-medium hover:text-(--primary) line-clamp-1"
+                          className="text-sm font-medium hover:text-(--primary) line-clamp-1 transition-colors"
                         >
                           {item.name}
                         </Link>
-                        <p className="text-sm font-semibold mt-0.5">
+                        <p className="text-sm font-semibold mt-0.5 text-stone-900">
                           {formatPrice(item.price)}
                         </p>
                         <div className="flex items-center gap-2 mt-2">
@@ -98,24 +100,24 @@ export function CartDrawer() {
                             onClick={() =>
                               updateQuantity(item.productId, item.quantity - 1)
                             }
-                            className="p-0.5 rounded hover:bg-(--muted)"
+                            className="p-1 rounded-lg hover:bg-stone-100 transition-colors"
                           >
                             <Minus className="size-3.5" />
                           </button>
-                          <span className="text-sm w-8 text-center">
+                          <span className="text-sm w-8 text-center font-medium">
                             {item.quantity}
                           </span>
                           <button
                             onClick={() =>
                               updateQuantity(item.productId, item.quantity + 1)
                             }
-                            className="p-0.5 rounded hover:bg-(--muted)"
+                            className="p-1 rounded-lg hover:bg-stone-100 transition-colors"
                           >
                             <Plus className="size-3.5" />
                           </button>
                           <button
                             onClick={() => removeItem(item.productId)}
-                            className="ml-auto p-0.5 rounded text-red-500 hover:bg-red-50"
+                            className="ml-auto p-1 rounded-lg text-red-500 hover:bg-red-50 transition-colors"
                           >
                             <Trash2 className="size-3.5" />
                           </button>
@@ -125,8 +127,8 @@ export function CartDrawer() {
                   ))}
                 </div>
 
-                <div className="border-t border-(--border) p-4 space-y-3">
-                  <div className="flex items-center justify-between font-semibold">
+                <div className="border-t border-(--border) p-5 space-y-3">
+                  <div className="flex items-center justify-between font-semibold text-stone-900">
                     <span>Subtotal</span>
                     <span>{formatPrice(subtotal())}</span>
                   </div>

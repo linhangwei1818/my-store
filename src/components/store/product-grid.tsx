@@ -7,6 +7,7 @@ interface ProductGridProps {
     price: number;
     compareAtPrice: number | null;
     images: { url: string; alt: string | null }[];
+    createdAt?: string | Date;
   }[];
 }
 
