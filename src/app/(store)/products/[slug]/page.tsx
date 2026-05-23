@@ -148,6 +148,18 @@ export default async function ProductPage({
 
           {inStock && <AddToCart product={product} />}
 
+          <div className="mt-6">
+            <Link
+              href={`/contact?product=${encodeURIComponent(product.name)}&productId=${product.id}`}
+              className="inline-flex items-center gap-2 text-sm text-(--primary) hover:text-(--primary-hover) font-medium transition-colors"
+            >
+              <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              Ask about this product
+            </Link>
+          </div>
+
           <div className="mt-10 border-t border-(--border) pt-10">
             <h2 className="font-semibold text-lg mb-4 text-stone-900">Description</h2>
             <div className="prose prose-stone prose-sm max-w-none text-(--muted-foreground) whitespace-pre-wrap leading-relaxed">

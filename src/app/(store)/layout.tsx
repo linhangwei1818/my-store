@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { ShoppingCart, Search, Menu, Heart, Sparkles } from "lucide-react";
 import { CartDrawer } from "@/components/store/cart-drawer";
+import { WhatsAppButton } from "@/components/store/whatsapp-button";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/products", label: "Shop" },
   { href: "/products?sort=newest", label: "New Arrivals" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function StoreLayout({
@@ -58,6 +60,8 @@ export default function StoreLayout({
 
       <main className="flex-1">{children}</main>
 
+      <WhatsAppButton />
+
       <footer className="bg-stone-900 text-stone-300">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -80,6 +84,7 @@ export default function StoreLayout({
             <div>
               <h4 className="text-white font-medium text-sm mb-4">Support</h4>
               <ul className="space-y-2.5 text-sm text-stone-400">
+                <li><Link href="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
                 <li><Link href="/shipping" className="hover:text-white transition-colors">Shipping Policy</Link></li>
                 <li><Link href="/returns" className="hover:text-white transition-colors">Returns</Link></li>
               </ul>
