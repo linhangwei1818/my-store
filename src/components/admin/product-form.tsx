@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select } from "@/components/ui/select";
 import { slugify } from "@/lib/utils";
 import toast from "react-hot-toast";
+import { X } from "lucide-react";
 
 interface ProductFormData {
   name: string;
@@ -30,6 +31,12 @@ interface Category {
   name: string;
 }
 
+interface ExistingImage {
+  id: string;
+  url: string;
+  alt: string | null;
+}
+
 interface ProductFormProps {
   initialData?: {
     id?: string;
@@ -49,13 +56,17 @@ interface ProductFormProps {
     metaDescription: string | null;
   };
   categories: Category[];
+  existingImages?: ExistingImage[];
 }
 
-export function ProductForm({ initialData, categories }: ProductFormProps) {
+export function ProductForm({ initialData, categories, existingImages }: ProductFormProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [imageFiles, setImageFiles] = useState<File[]>([]);
-  const [imageUrls, setImageUrls] = useState<string[]>([]);
+  const [imageUrls, setImageUrls] = useState<string[]>(
+    existingImages?.map((img) => img.url) || []
+  );
+  const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
 
   const [form, setForm] = useState<ProductFormData>({
@@ -164,13 +175,30 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
       const data = await res.json();
 
       if (res.ok) {
-        if (imageUrls.length > 0 && data.product?.id) {
-          for (let i = 0; i < imageUrls.length; i++) {
+        // Delete removed existing images
+        if (deletedImageIds.length > 0) {
+          for (const imageId of deletedImageIds) {
+            await fetch(`/api/products/${data.product.id}/images`, {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ imageId }),
+            });
+          }
+        }
+
+        // Only save newly uploaded images (those not from existingImages)
+        const existingUrls = new Set(
+          (existingImages || []).map((img) => img.url)
+        );
+        const newUrls = imageUrls.filter((url) => !existingUrls.has(url));
+
+        if (newUrls.length > 0 && data.product?.id) {
+          for (let i = 0; i < newUrls.length; i++) {
             await fetch(`/api/products/${data.product.id}/images`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify({
-                url: imageUrls[i],
+                url: newUrls[i],
                 alt: form.name,
                 sortOrder: i,
               }),
@@ -340,6 +368,40 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
       {/* Images */}
       <div className="bg-white rounded-xl border border-(--border) p-6 space-y-4">
         <h2 className="font-semibold">商品图片</h2>
+
+        {/* Existing images (edit mode) */}
+        {existingImages && existingImages.length > 0 && (
+          <div className="space-y-2">
+            <p className="text-sm text-(--muted-foreground)">当前图片</p>
+            <div className="flex gap-2 flex-wrap">
+              {existingImages.map((img) => {
+                if (deletedImageIds.includes(img.id)) return null;
+                return (
+                  <div key={img.id} className="relative group">
+                    <img
+                      src={img.url}
+                      alt={img.alt || "商品图片"}
+                      className="size-24 object-cover rounded-lg border border-(--border)"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setDeletedImageIds([...deletedImageIds, img.id]);
+                        setImageUrls(imageUrls.filter((u) => u !== img.url));
+                      }}
+                      className="absolute -top-2 -right-2 size-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                      title="删除此图片"
+                    >
+                      <X className="size-3.5" />
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Upload new images */}
         <div>
           <Input
             type="file"
@@ -357,15 +419,26 @@ export function ProductForm({ initialData, categories }: ProductFormProps) {
             </p>
           )}
         </div>
+
+        {/* Newly uploaded images preview */}
         {imageUrls.length > 0 && (
           <div className="flex gap-2 flex-wrap">
             {imageUrls.map((url, idx) => (
-              <img
-                key={idx}
-                src={url}
-                alt={`图片 ${idx + 1}`}
-                className="size-20 object-cover rounded-lg border border-(--border)"
-              />
+              <div key={idx} className="relative group">
+                <img
+                  src={url}
+                  alt={`图片 ${idx + 1}`}
+                  className="size-24 object-cover rounded-lg border border-(--border)"
+                />
+                <button
+                  type="button"
+                  onClick={() => setImageUrls(imageUrls.filter((_, i) => i !== idx))}
+                  className="absolute -top-2 -right-2 size-6 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-600"
+                  title="移除此图片"
+                >
+                  <X className="size-3.5" />
+                </button>
+              </div>
             ))}
           </div>
         )}

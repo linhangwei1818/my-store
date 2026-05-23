@@ -32,6 +32,11 @@ export default async function EditProductPage({
           metaDescription: product.metaDescription,
         }}
         categories={categories}
+        existingImages={product.images.map((img) => ({
+          id: img.id,
+          url: img.url,
+          alt: img.alt,
+        }))}
       />
     </div>
   );
