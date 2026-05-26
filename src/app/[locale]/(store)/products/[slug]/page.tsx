@@ -11,6 +11,14 @@ import { generateSiteMetadata, productJsonLd, breadcrumbJsonLd } from "@/lib/seo
 
 export const revalidate = 300;
 
+export async function generateStaticParams() {
+  const products = await prisma.product.findMany({
+    where: { isActive: true },
+    select: { slug: true },
+  });
+  return products.map((p) => ({ slug: p.slug }));
+}
+
 async function getProduct(slug: string) {
   return prisma.product.findUnique({
     where: { slug, isActive: true },
