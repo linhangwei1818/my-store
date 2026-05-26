@@ -18,6 +18,14 @@
     "viewAll": "전체 보기",
     "viewAllMobile": "모든 상품 보기"
   },
+  "trending": {
+    "overline": "트렌드",
+    "title": "인기 상품"
+  },
+  "inspiration": {
+    "overline": "영감 얻기",
+    "title": "공간 스타일링"
+  },
   "promise": {
     "shipping": {
       "title": "무료 배송",

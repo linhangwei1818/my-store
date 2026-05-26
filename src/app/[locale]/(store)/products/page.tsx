@@ -75,19 +75,41 @@ export default async function ProductsPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+      {/* Category banner */}
+      {currentCategory && (() => {
+        const cat = categories.find((c) => c.slug === currentCategory);
+        if (!cat) return null;
+        return (
+          <div className="relative h-48 md:h-64 rounded-2xl overflow-hidden mb-10 bg-stone-200">
+            {cat.image && (
+              <img
+                src={cat.image}
+                alt={cat.name}
+                className="size-full object-cover"
+              />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/10" />
+            <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+              <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">{cat.name}</h1>
+              <p className="text-stone-300 text-sm">
+                {t("listing.inCollection", { total })}
+              </p>
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Page Header */}
-      <div className="mb-10">
-        <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-2">
-          {currentCategory
-            ? categories.find((c) => c.slug === currentCategory)?.name || t("listing.title")
-            : t("listing.title")}
-        </h1>
-        <p className="text-(--muted-foreground)">
-          {currentCategory
-            ? t("listing.inCollection", { total })
-            : t("listing.browseAll", { total })}
-        </p>
-      </div>
+      {!currentCategory && (
+        <div className="mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-stone-900 mb-2">
+            {t("listing.title")}
+          </h1>
+          <p className="text-(--muted-foreground)">
+            {t("listing.browseAll", { total })}
+          </p>
+        </div>
+      )}
 
       <div className="flex flex-col md:flex-row gap-10">
         {/* Sidebar filters */}

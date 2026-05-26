@@ -18,6 +18,14 @@
     "viewAll": "View All",
     "viewAllMobile": "View All Products"
   },
+  "trending": {
+    "overline": "Trending Now",
+    "title": "Popular Picks"
+  },
+  "inspiration": {
+    "overline": "Get Inspired",
+    "title": "Style Your Space"
+  },
   "promise": {
     "shipping": {
       "title": "Free Shipping",

@@ -4,7 +4,8 @@
     "new": "Nuevo"
   },
   "card": {
-    "noImage": "Sin Imagen"
+    "noImage": "Sin Imagen",
+    "quickAdd": "Añadir Rápido"
   },
   "listing": {
     "title": "Todos los Productos",
@@ -23,7 +24,8 @@
     "addToCart": "Añadir al Carrito",
     "addedToCart": "{name} añadido al carrito",
     "askAbout": "Consultar sobre este producto",
-    "description": "Descripción"
+    "description": "Descripción",
+    "moreImages": "Más Vistas"
   },
   "sort": {
     "newest": "Más Reciente",

@@ -18,6 +18,14 @@
     "viewAll": "Ver Todo",
     "viewAllMobile": "Ver Todos los Productos"
   },
+  "trending": {
+    "overline": "Tendencias",
+    "title": "Selecciones Populares"
+  },
+  "inspiration": {
+    "overline": "Inspírate",
+    "title": "Decora Tu Espacio"
+  },
   "promise": {
     "shipping": {
       "title": "Envío Gratis",

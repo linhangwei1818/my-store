@@ -1,8 +1,10 @@
 import { Link } from "@/i18n/navigation";
 import { prisma } from "@/lib/prisma";
 import { ProductGrid } from "@/components/store/product-grid";
+import { ScrollRow } from "@/components/store/scroll-row";
+import { HeroCarousel } from "@/components/store/hero-carousel";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Truck, Shield, RotateCcw, Flower2, Home, Palette, Gem } from "lucide-react";
+import { ArrowRight, Truck, Shield, RotateCcw, Gem } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 
 export const revalidate = 3600;
@@ -16,60 +18,62 @@ async function getFeaturedProducts() {
   });
 }
 
+async function getTrendingProducts() {
+  return prisma.product.findMany({
+    where: { isActive: true },
+    include: { images: { orderBy: { sortOrder: "asc" } } },
+    take: 8,
+    orderBy: { createdAt: "desc" },
+  });
+}
+
 async function getCategories() {
   return prisma.category.findMany({
-    include: { _count: { select: { products: { where: { isActive: true } } } } },
+    include: {
+      _count: { select: { products: { where: { isActive: true } } } },
+      products: {
+        where: { isActive: true },
+        include: { images: { orderBy: { sortOrder: "asc" }, take: 1 } },
+        take: 1,
+        orderBy: { createdAt: "desc" },
+      },
+    },
     orderBy: { sortOrder: "asc" },
   });
 }
 
-const categoryIcons: Record<string, React.ReactNode> = {
-  "Home & Garden": <Home className="size-6" />,
-  "Clothing": <Gem className="size-6" />,
-  "Electronics": <Palette className="size-6" />,
-  "Sports": <Flower2 className="size-6" />,
-};
-
 export default async function HomePage() {
   const t = await getTranslations("home");
-  const [featuredProducts, categories] = await Promise.all([
+  const [featuredProducts, categories, trendingProducts] = await Promise.all([
     getFeaturedProducts(),
     getCategories(),
+    getTrendingProducts(),
   ]);
+
+  const heroImages = featuredProducts
+    .filter((p) => p.images.length > 0)
+    .slice(0, 4)
+    .map((p) => ({
+      url: p.images[0].url,
+      alt: p.images[0].alt || p.name,
+    }));
 
   return (
     <div>
-      {/* Hero */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-stone-50 to-(--accent)">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-24 md:py-36 text-center">
-          <p className="text-sm font-medium tracking-widest uppercase text-(--primary) mb-4">
-            {t("hero.overline")}
-          </p>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-stone-900 mb-6 leading-tight">
-            {t("hero.title1")}
-            <br />
-            <span className="text-(--primary)">{t("hero.title2")}</span>
-          </h1>
-          <p className="text-base md:text-lg text-(--muted-foreground) max-w-lg mx-auto mb-10 leading-relaxed">
-            {t("hero.subtitle")}
-          </p>
-          <div className="flex items-center justify-center gap-3 flex-wrap">
-            <Link href="/products">
-              <Button variant="primary" size="lg" className="shadow-lg shadow-orange-200">
-                {t("hero.cta1")}
-                <ArrowRight className="ml-2 size-4" />
-              </Button>
-            </Link>
-            <Link href="/products?sort=newest">
-              <Button variant="outline" size="lg">
-                {t("hero.cta2")}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero — product image carousel */}
+      <HeroCarousel
+        images={heroImages}
+        overline={t("hero.overline")}
+        title1={t("hero.title1")}
+        title2={t("hero.title2")}
+        subtitle={t("hero.subtitle")}
+        cta1Label={t("hero.cta1")}
+        cta1Href="/products"
+        cta2Label={t("hero.cta2")}
+        cta2Href="/products?sort=newest"
+      />
 
-      {/* Categories */}
+      {/* Categories — with real product images */}
       {categories.length > 0 && (
         <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center mb-12">
@@ -81,30 +85,56 @@ export default async function HomePage() {
             </h2>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
-            {categories.map((cat) => (
-              <Link
-                key={cat.id}
-                href={`/categories/${cat.slug}`}
-                className="group relative bg-white rounded-2xl border border-(--border) p-8 text-center hover:border-(--primary) hover:shadow-lg hover:shadow-orange-50 transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="mx-auto size-14 flex items-center justify-center rounded-xl bg-(--accent) text-(--primary) mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {categoryIcons[cat.name] || <Gem className="size-6" />}
-                </div>
-                <h3 className="font-semibold group-hover:text-(--primary) transition-colors">
-                  {cat.name}
-                </h3>
-                <p className="text-sm text-(--muted-foreground) mt-1">
-                  {t("categories.count", { count: cat._count.products })}
-                </p>
-              </Link>
-            ))}
+            {categories.map((cat) => {
+              const catImage = cat.products[0]?.images[0];
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/categories/${cat.slug}`}
+                  className="group relative bg-white rounded-2xl border border-(--border) overflow-hidden hover:border-(--primary)/30 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+                >
+                  {/* Category image */}
+                  <div className="aspect-[4/3] bg-(--muted) overflow-hidden">
+                    {catImage ? (
+                      <img
+                        src={catImage.url}
+                        alt={catImage.alt || cat.name}
+                        className="size-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                    ) : (
+                      <div className="size-full flex items-center justify-center text-(--muted-foreground)">
+                        <Gem className="size-8 opacity-30" />
+                      </div>
+                    )}
+                  </div>
+                  {/* Label */}
+                  <div className="p-4 text-center">
+                    <h3 className="font-semibold group-hover:text-(--primary) transition-colors">
+                      {cat.name}
+                    </h3>
+                    <p className="text-sm text-(--muted-foreground) mt-1">
+                      {t("categories.count", { count: cat._count.products })}
+                    </p>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}
 
+      {/* Trending — horizontal scroll row */}
+      {trendingProducts.length > 0 && (
+        <ScrollRow
+          products={trendingProducts}
+          overline={t("trending.overline")}
+          title={t("trending.title")}
+        />
+      )}
+
       {/* Featured Products */}
       {featuredProducts.length > 0 && (
-        <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20">
+        <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
           <div className="flex items-end justify-between mb-12">
             <div>
               <p className="text-sm font-medium tracking-widest uppercase text-(--primary) mb-3">
@@ -129,6 +159,51 @@ export default async function HomePage() {
                 <ArrowRight className="ml-2 size-4" />
               </Button>
             </Link>
+          </div>
+        </section>
+      )}
+
+      {/* Inspiration gallery — 2x2 lifestyle grid */}
+      {trendingProducts.length >= 4 && (
+        <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center mb-10">
+            <p className="text-sm font-medium tracking-widest uppercase text-(--primary) mb-3">
+              {t("inspiration.overline")}
+            </p>
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-900">
+              {t("inspiration.title")}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {trendingProducts.slice(0, 4).map((product, i) => {
+              const img = product.images[0];
+              const isTall = i === 0 || i === 3;
+              return (
+                <Link
+                  key={product.slug}
+                  href={`/products/${product.slug}`}
+                  className={`group relative overflow-hidden rounded-2xl bg-(--muted) ${
+                    isTall ? "md:row-span-2 md:col-span-1" : ""
+                  }`}
+                >
+                  <div className={isTall ? "aspect-[3/4]" : "aspect-square"}>
+                    {img && (
+                      <img
+                        src={img.url}
+                        alt={img.alt || product.name}
+                        className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <p className="text-white text-sm font-medium line-clamp-1">
+                        {product.name}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

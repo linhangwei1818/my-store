@@ -4,7 +4,8 @@
     "new": "新着"
   },
   "card": {
-    "noImage": "画像なし"
+    "noImage": "画像なし",
+    "quickAdd": "クイック追加"
   },
   "listing": {
     "title": "すべての商品",
@@ -23,7 +24,8 @@
     "addToCart": "カートに入れる",
     "addedToCart": "{name} をカートに追加しました",
     "askAbout": "この商品について問い合わせる",
-    "description": "商品説明"
+    "description": "商品説明",
+    "moreImages": "他の画像"
   },
   "sort": {
     "newest": "新着順",

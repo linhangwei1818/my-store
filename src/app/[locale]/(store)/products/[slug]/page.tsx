@@ -53,6 +53,7 @@ export default async function ProductPage({
   const hasSale = product.compareAtPrice && product.compareAtPrice > product.price;
 
   return (
+    <>
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
       <script
         type="application/ld+json"
@@ -174,5 +175,29 @@ export default async function ProductPage({
         </div>
       </div>
     </div>
+
+    {/* More Views */}
+    {product.images.length > 1 && (
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16">
+        <h2 className="text-xl md:text-2xl font-bold text-stone-900 mb-6 text-center">
+          {t("detail.moreImages")}
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {product.images.map((img) => (
+            <div
+              key={img.url}
+              className="aspect-square bg-(--muted) rounded-xl overflow-hidden"
+            >
+              <img
+                src={img.url}
+                alt={img.alt || product.name}
+                className="size-full object-cover hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+    </>
   );
 }

@@ -4,7 +4,8 @@
     "new": "신상"
   },
   "card": {
-    "noImage": "이미지 없음"
+    "noImage": "이미지 없음",
+    "quickAdd": "빠른 추가"
   },
   "listing": {
     "title": "전체 상품",
@@ -23,7 +24,8 @@
     "addToCart": "장바구니 담기",
     "addedToCart": "{name} 장바구니에 추가됨",
     "askAbout": "이 상품 문의하기",
-    "description": "상품 설명"
+    "description": "상품 설명",
+    "moreImages": "더 많은 이미지"
   },
   "sort": {
     "newest": "최신순",

@@ -18,6 +18,14 @@
     "viewAll": "すべて見る",
     "viewAllMobile": "すべての商品を見る"
   },
+  "trending": {
+    "overline": "トレンド",
+    "title": "人気のアイテム"
+  },
+  "inspiration": {
+    "overline": "インスピレーション",
+    "title": "空間をスタイリング"
+  },
   "promise": {
     "shipping": {
       "title": "送料無料",
