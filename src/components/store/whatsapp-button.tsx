@@ -8,16 +8,21 @@ const ENABLED = Boolean(WHATSAPP_NUMBER);
 export function WhatsAppButton() {
   const t = useTranslations("common");
   const [visible, setVisible] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState("");
 
   useEffect(() => {
     const timer = setTimeout(() => setVisible(true), 1500);
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
+
   if (!ENABLED) return null;
 
   const message = encodeURIComponent(
-    `${t("whatsapp.message")}\n\nPage: ${typeof window !== "undefined" ? window.location.href : ""}`
+    `${t("whatsapp.message")}\n\nPage: ${currentUrl}`
   );
 
   return (
