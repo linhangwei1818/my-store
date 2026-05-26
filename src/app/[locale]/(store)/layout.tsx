@@ -1,5 +1,5 @@
 import { Link } from "@/i18n/navigation";
-import { ShoppingCart, Search, Menu, Sparkles } from "lucide-react";
+import { Search, Menu, Sparkles } from "lucide-react";
 import { CartDrawer } from "@/components/store/cart-drawer";
 import { WhatsAppButton } from "@/components/store/whatsapp-button";
 import { LanguageSwitcher } from "@/components/store/language-switcher";

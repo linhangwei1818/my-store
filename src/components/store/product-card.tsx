@@ -1,9 +1,12 @@
 "use client"
 
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatPrice } from "@/lib/utils";
+
+const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
 
 interface ProductCardProps {
   product: {
@@ -20,10 +23,14 @@ export function ProductCard({ product }: ProductCardProps) {
   const t = useTranslations("product");
   const locale = useLocale();
   const image = product.images[0];
+  const [now] = useState(() => Date.now());
   const hasSale = product.compareAtPrice && product.compareAtPrice > product.price;
-  const isNew =
-    product.createdAt &&
-    new Date(product.createdAt).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000;
+  const isNew = useMemo(
+    () =>
+      product.createdAt &&
+      new Date(product.createdAt).getTime() > now - THIRTY_DAYS,
+    [product.createdAt, now],
+  );
 
   return (
     <Link href={`/products/${product.slug}`}>

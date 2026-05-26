@@ -1,5 +1,4 @@
 "use client"
-import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
@@ -8,7 +7,6 @@ const ENABLED = Boolean(WHATSAPP_NUMBER);
 
 export function WhatsAppButton() {
   const t = useTranslations("common");
-  const pathname = usePathname();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
