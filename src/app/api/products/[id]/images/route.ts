@@ -1,14 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
-import { unlink } from "fs/promises";
-import { existsSync } from "fs";
-import path from "path";
-
-const UPLOAD_DIR =
-  process.env.NODE_ENV === "production"
-    ? path.join("/tmp", "uploads")
-    : path.join(process.cwd(), "public", "uploads");
 
 export async function POST(
   req: NextRequest,
@@ -61,20 +53,6 @@ export async function DELETE(
   }
 
   await prisma.productImage.delete({ where: { id: imageId } });
-
-  // Try to delete the file from disk
-  try {
-    const urlPath = image.url;
-    const filename = urlPath.split("/").pop();
-    if (filename) {
-      const filePath = path.join(UPLOAD_DIR, path.basename(filename));
-      if (existsSync(filePath)) {
-        await unlink(filePath);
-      }
-    }
-  } catch {
-    // Best-effort deletion from disk
-  }
 
   return NextResponse.json({ success: true });
 }
